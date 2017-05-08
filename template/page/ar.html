@@ -1,0 +1,46 @@
+<video id="video" autoplay=""style='width:100%;position:fixed;top:0;'></video>
+
+<script>
+  var video = document.getElementById("video");
+  var errocb = function () {
+            console.log('sth wrong!');           
+  }
+  if (navigator.getUserMedia) { // 标准的API
+      navigator.getUserMedia({ "video": true }, function (stream) {
+          video.src = window.URL.createObjectURL(stream);
+          video.play();
+      }, errocb);
+  } else if (navigator.webkitGetUserMedia) { // WebKit 核心的API
+      navigator.webkitGetUserMedia({ "video": true }, function (stream) {
+          video.src = window.URL.createObjectURL(stream);
+          video.play();
+      }, errocb);
+ }
+</script>
+
+<script src="https://aframe.io/releases/0.5.0/aframe.min.js"></script>
+<a-scene style="position: fixed;">
+  <a-assets>
+    <img id="xiabu" src="xiabu.png">
+    <a-mixin
+          id="marker"
+          geometry="primitive: plane; width: 0.02; height: 0.02"
+          material="color: red"
+        ></a-mixin>
+    <img id="city-thumb" src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/thumb-city.jpg">
+  </a-assets>
+  <a-image position="1 4.6 -2" width="1" height=".5"  src="#xiabu"></a-image>
+      <a-entity position="1.8 4.5 -4"
+                text="width: 4; color: white; value: xiaobu">
+      </a-entity>
+     
+
+        
+        <a-plane position="0 4.5 -4" rotation="0 0 0" width="1" height=".5" color="#7BC8A4"></a-plane>
+       <a-plane position="-1 2.5 -4" rotation="0 0 0" width="1" height=".5" color="#7BC3A1"></a-plane>
+       <a-plane position="2 4 -7" rotation="0 0 0" width="1" height=".5" color="#7BC3A1"></a-plane>
+ 
+   <a-entity position="0 1.8 2">
+        <a-entity camera look-controls wasd-controls></a-entity>
+      </a-entity>
+</a-scene>
